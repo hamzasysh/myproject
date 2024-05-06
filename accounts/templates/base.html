@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{% static 'accounts/logo.png' %}" >
   <title>{% block title %}5Axis Shipping Terminal{% endblock %}</title>
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}"> -->
+
   <style>
     body {
       background-size: cover;
@@ -42,7 +42,7 @@
 
     .content {
       top:0;
-      margin-bottom: 100px; /* Adjust this value to create space between content and footer */
+      margin-bottom: 120px; /* Adjust this value to create space between content and footer */
       margin-left: 250px; /* Adjust based on the width of the sidebar */
       padding: 20px; /* Add padding as needed */
       flex-grow: 1; /* Allow content to grow to fill remaining space */
@@ -152,10 +152,154 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
+  table {
+    border-collapse: collapse;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #0e84b2;
+  }
+
+  tr:nth-child(even) {
+    background-color:violet;
+  }
+
+  .sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #2c3e50; /* Dark blue background */
+    color: #ecf0f1; /* Light text color */
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-250px); /* Initially hidden */
+    position:absolute;
+    top: 80px;
+    left: 0;
+    z-index: 1000; /* Ensure sidebar is above the strip */
+    overflow-y: auto; /*Make sidebar scrollable*/
+  }
+  
+  .sidebar-content {
+    padding-left: 20px; /* Adjust the padding to ensure text is aligned to the extreme left */
+    position: relative; /* Ensure relative positioning */
+    z-index: 1; /* Ensure sidebar content is above the strip */
+  }
+  
+  .sidebar-header {
+    padding: 20px 20px 20px 40px; /* Adjust the padding to align with the strip */
+    background: #34495e; /* Darker blue background for header */
+  }
+  
+  .sidebar-header h3 {
+    margin-bottom: 0;
+  }
+  
+  .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .list-unstyled li a {
+    display: block;
+    padding: 10px 20px;
+    color: #ecf0f1; /* Light text color */
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  .list-unstyled li a:hover {
+    background: #2c3e50; /* Darker background color on hover */
+  }
+  
+  /* Strip */
+  .invisible-trigger {
+    /* position: fixed; */
+    top: 80;
+    left: 0;
+    width: 40px; /* Width of the strip */
+    height: 100vh; 
+    background: #34495e; /* Darker blue background */
+    z-index: 999; /* Ensure the strip is above the sidebar */
+    cursor: pointer;
+  }
+  
+  .arrow-icon {
+    position: absolute;
+    top: 50%;
+    left: 5px; /* Adjust the left position to align with the sidebar */
+    transform: translateY(-50%);
+    color: #ecf0f1; /* Light text color */
+  }
+  
+  .arrow-icon i {
+    cursor: pointer;
+    font-size: 15px; /* Reduce arrow size */
+  }
+  
+  /* Sub-items */
+  .sub-items {
+    padding-left: 30px;
+    margin-top: 0; /* Remove default margin */
+    display: none; /* Initially hide sub-items */
+    list-style: none; /* Remove bullets */
+  }
+  
+  .sub-items.open {
+    display: block; /* Display when parent link is hovered */
+  }
+  
+  /* Style for sub-items links */
+  .sub-items a {
+    color: #bdc3c7; /* Lighter text color for sub-items */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Display as block for better spacing */
+    padding: 10px 40px; /* Padding */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  /* Hover effect for sub-items */
+  .sub-items a:hover {
+    background-color:white; /* Darker background color on hover */
+    color: rgb(16, 191, 89); /* Light text color on hover */
+  }
+  
+  /* Dropdown Content */
+  .dropdown-content {
+    display: none;
+    position:absolute;
+    /* position: fixed; */
+    background-color: #34495e; /* Dark blue background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 250px; /* Set width of dropdown */
+  }
+  
+  /* Style for dropdown links */
+  .dropdown-content a {
+    color:yellow; /* Light text color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Display as block for better spacing */
+    padding: 10px 20px; /* Padding */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  /* Hover effect for dropdown links */
+  .dropdown-content a:hover {
+    background-color:#34495e; /* Darker background color on hover */
+    color :red;
+  }
   </style>
 </head>
 <body>
-  {% load static %}
+  <!-- {% load static %} -->
 
   <!-- Navigation bar -->
   <nav class="navbar">
@@ -211,5 +355,36 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function adjustSidebarHeight() {
+        var sidebar = document.querySelector('.sidebar');
+        var invisibleTrigger=document.querySelector('.invisible-trigger');
+        var content = document.querySelector('.flex-grow-1'); // Change selector here
+        var footer = document.querySelector('.footer');
+    
+        console.log(sidebar, content, footer); // Check if these are null
+    
+        if (sidebar && content && footer) {
+            // Rest of your code
+            var contentHeight = content.offsetHeight;
+            var footerHeight = footer.offsetHeight;
+            var windowHeight = window.innerHeight;
+            var sidebarHeight = Math.max(contentHeight, windowHeight - footerHeight);
+            console.log(sidebarHeight);
+            invisibleTrigger.style.height=sidebarHeight+'px';
+            sidebar.style.height = sidebarHeight + 'px'; // Use 'px' instead of 'vh'
+             // Set margin-bottom for content to avoid overlapping with the footer
+            var contentMarginBottom = footerHeight -5// Adjust this value as needed
+            content.style.marginBottom = contentMarginBottom + 'px';
+            
+        }
+    }
+    
+    // Wait for the content block to be available
+    window.onload = function() {
+        adjustSidebarHeight();
+    };
+    </script>
+    
 </body>
 </html>
