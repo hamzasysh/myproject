@@ -16,7 +16,7 @@ body {
     top: 80px;
     left: 0;
     z-index: 1000; /* Ensure sidebar is above the strip */
-    overflow-y: auto; /*Make sidebar scrollable*/
+    overflow: auto; /*Make sidebar scrollable*/
   }
   
   .sidebar-content {
