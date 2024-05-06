@@ -87,6 +87,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#             'ENGINE': 'djongo',
+#             'ENFORCE_SCHEMA': False,
+#             'CLIENT': {
+#                 'host': os.getenv('HOST'),
+#                 'name': os.getenv('DB'),
+#                 'authMechanism': 'SCRAM-SHA-1'
+#             }
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
