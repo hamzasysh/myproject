@@ -1,0 +1,42 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore environment-specific settings
+# *.env
+
+# Ignore SQLite database file
+*.sqlite3
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE settings
+.idea/
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore static files generated during development
+# /staticfiles/
+
+# Ignore media files (user-uploaded content)
+# /media/
+
+# Ignore secret settings files
+*.secret
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore backup files
+*.bak
+
+# Ignore configuration files
+*.cfg
+
+# Ignore package files
+*.egg-info/
+*.egg

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pharmacy 5Axis Health</title>
+  <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+<!-- Strip -->
+<div class="invisible-trigger" id="sidebarToggle">
+  <span class="arrow-icon"><i class="fas fa-chevron-right"></i></span>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3><span style="color: rgb(239, 185, 8); font-weight: bold;">5Axis</span><br> Shipping Terminal</h3>
+  </div>
+  <div class="sidebar-content">
+    <ul class="list-unstyled components" id="sidebarList">
+    </ul>
+  </div>
+</div>
+<div id="dropdownContainer"></div>
+
+<script src="{% static 'accounts/js/script.js' %}"></script>
+</body>
+</html>
