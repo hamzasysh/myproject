@@ -28,6 +28,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1500;
 }
 
 .footer p {
@@ -39,14 +40,12 @@
   margin-right: 5px; /* Add some space between the symbol and the text */
 }
 
+.content {
+  top:0;
+  margin-left: 0; /* Adjusted to remove the space */
+  flex-grow: 1;
+}
 
-    .content {
-      top:0;
-      margin-bottom: 120px; /* Adjust this value to create space between content and footer */
-      margin-left: 250px; /* Adjust based on the width of the sidebar */
-      padding: 20px; /* Add padding as needed */
-      flex-grow: 1; /* Allow content to grow to fill remaining space */
-    }
     .navbar {
       background-color:#34495e; /* Darker grey background */
       color: #fff;
@@ -89,7 +88,6 @@
     border-bottom-right-radius: 20px;
     font-size: 14px;
     }
-
     /* .navbar-search button {
       border: none;
       background-color: #007bff;
@@ -154,14 +152,16 @@
     }
     
   table {
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
     margin-top: 0;
-    width: 100%;
+    width: 80%;
+     margin-left: 30px;  
+     margin-bottom: 10px;
   }
 
   th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 2px solid #c56608;
+    padding: 4px;
     text-align: left;
   }
 
@@ -186,6 +186,7 @@
     z-index: 1000; /* Ensure sidebar is above the strip */
     overflow-y: auto; /*Make sidebar scrollable*/
   }
+
   
   .sidebar-content {
     padding-left: 20px; /* Adjust the padding to ensure text is aligned to the extreme left */
@@ -296,6 +297,32 @@
     background-color:#34495e; /* Darker background color on hover */
     color :red;
   }
+  .pagination-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+}
+
+.pagination-buttons button {
+  border-radius: 30px;
+  margin: 0 5px; /* Add some spacing between buttons */
+}
+
+.pagination-buttons button:hover {
+  background-color: #007bff; /* Change color on hover */
+}
+
+.pagination-buttons button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.custom-container {
+    width: 90%; /* Adjust width as needed */
+    max-width: 1200px; /* Optional: Set max-width for larger screens */
+    margin: 0 auto; /* Center the container horizontally */
+    /* Add other styles as needed */
+}
+
   </style>
 </head>
 <body>
@@ -326,16 +353,23 @@
     </div>
   </nav>
 
-  <div style="display: flex; flex-direction: column" class="container-fluid flex-grow-1 px-0">
-    <div style="display: flex" class="flex-grow-1">
-      {% include 'sidebar.html' %}
-
-      <main role="main" class="px-4 flex-grow-1" style="padding: 20px">
-        {% block content %}
-        {% endblock %}
-      </main>
+  <div class="container-fluid" style="padding: 0px;">
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <div>
+        {% include 'sidebar.html' %}
+      </div>
+      <!-- Main Content -->
+      <div class="flex-grow-1">
+        <main role="main" class="px-4" style="padding: 20px">
+          {% block content %}
+            <!-- Your main content here -->
+          {% endblock %}
+        </main>
+      </div>
     </div>
   </div>
+  
 
 
   <footer class="footer">
@@ -365,17 +399,17 @@
         console.log(sidebar, content, footer); // Check if these are null
     
         if (sidebar && content && footer) {
-            // Rest of your code
+           // Rest of your code
             var contentHeight = content.offsetHeight;
             var footerHeight = footer.offsetHeight;
             var windowHeight = window.innerHeight;
             var sidebarHeight = Math.max(contentHeight, windowHeight - footerHeight);
-            console.log(sidebarHeight);
+            // console.log(sidebarHeight);
             invisibleTrigger.style.height=sidebarHeight+'px';
             sidebar.style.height = sidebarHeight + 'px'; // Use 'px' instead of 'vh'
-             // Set margin-bottom for content to avoid overlapping with the footer
-            var contentMarginBottom = footerHeight -5// Adjust this value as needed
-            content.style.marginBottom = contentMarginBottom + 'px';
+              // Set margin-bottom for content to avoid overlapping with the footer
+           var contentMarginBottom = footerHeight -5// Adjust this value as needed
+           content.style.marginBottom = contentMarginBottom + 'px';
             
         }
     }
