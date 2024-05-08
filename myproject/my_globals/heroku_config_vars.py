@@ -14,8 +14,9 @@ try:
     mongo_uri=env.str('MONGO_URI')
     db=env.str('DB')
 except:
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
-    mongo_uri=os.getenv('MONGO_URI')
-    db=os.getenv('DB')
+    pass
+    # from dotenv import load_dotenv
+    # import os
+    # load_dotenv()
+    # mongo_uri=os.getenv('MONGO_URI')
+    # db=os.getenv('DB')
