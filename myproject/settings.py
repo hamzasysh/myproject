@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from myproject.my_globals.heroku_config_vars import *
 #load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -149,5 +149,5 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-HOST_URI=os.getenv('MONGO_URI')
-DB=os.getenv('DB')
+HOST_URI=mongo_uri
+DB=db
