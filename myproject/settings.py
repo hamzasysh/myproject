@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts'
+    'accounts',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -90,8 +91,8 @@ DATABASES = {
             'ENGINE': 'djongo',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': mongo_uri, #os.getenv('MONGO_URI'),#mongo_uri,
-                'name': db, #os.getenv('DB'),#db,
+                'host': mongo_uri,
+                'name': db,
                 'authMechanism': 'SCRAM-SHA-1'
             }
     }
@@ -141,13 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-UNAME=os.getenv('USERNAME')
-PSWRD=os.getenv('PASSWORD')
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-HOST_URI=mongo_uri
-DB=db

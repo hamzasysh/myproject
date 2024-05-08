@@ -1,49 +1,57 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.conf import settings
 from django.http import JsonResponse
 from pymongo import MongoClient
+from myproject.my_globals.mongo_client import *
 import json
-# Create your views here.
+from accounts.utils.helpers import *
+from rest_framework import status
 
-client = MongoClient(settings.HOST_URI)
 
 def login(request):
     try:
         if request.method == 'POST':
-            # Connect to MongoDB
-            db = client[settings.DB]  # Database name
-            user_collection = db['user']  # Collection name
-            udoc=user_collection.find_one({'username':request.POST.get('username')})
-            print(udoc)
-            if udoc and udoc['password']==request.POST.get('password'):
-                return render(request,'orders.html')
+            if login_helper(request):
+                username=request.POST.get('username')
+                request.session['username'] = username
+                result = {"success": 1, "message": "Login Success","error_code":0}
+                return render(request,'orders.html',result)
             else:
-                return render(request,'login.html',{'error_message': 'Invalid username or password'})
-        else:
+                result = {"success": 0, "message": "Incorrect Password or Username","error_code":1}
+                return render(request,'login.html',result)
+        elif request.method == 'GET':
             return render(request,'login.html')
     except Exception as e:
-         return HttpResponse(str(e))
-
-def order_list(request):
-    if request.method=='POST':
-        request_data = json.loads(request.body.decode('utf-8'))
-        page_no = request_data.get('page_no')
-        if page_no!=1:
-            skip_count = (page_no - 1) * 30
-        else:
-            skip_count=0
-        # Connect to MongoDB
-        db = client[settings.DB]  # Database name
-        orders_collection = db['orders']  # Collection name
-        # Fetch documents from the collection
-        orders = list(orders_collection.find({},{'_id':0}).skip(skip_count).limit(30))
-        # Extract the first six fields from each document
-        serialized_orders = []
-        for order in orders:
-            first_six_fields = dict(list(order.items())[:8])
-            serialized_orders.append(first_six_fields)
-        # Return JSON response
-        return JsonResponse(serialized_orders, safe=False)
-    return HttpResponse('INVALID_HTTP_REQUEST')
+        result = {"success": 0, "message": str(e),"error_code":1}
+        return JsonResponse(result,safe=False,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+
+    
+def order_list(request):
+    try:
+        username = request.session.get('username')
+        if not username:
+            result = {"success": 0, "message": "User not found","error_code":1}
+            return JsonResponse(result, safe=False,status=status.HTTP_404_NOT_FOUND)
+        if request.method=='POST':
+            orders=orders_list_helper(request)
+            if len(orders)>0:
+                return JsonResponse(orders, safe=False,status=status.HTTP_200_OK)
+            else:
+                result = {"success": 0, "message": "Incorrect Password or Username","error_code":1}
+                return JsonResponse(result, safe=False,status=status.HTTP_404_NOT_FOUND)
+        result = {"success": 0, "message": "Invalid HTTP Request","error_code":1}
+        return JsonResponse(result, safe=False,status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        result = {"success": 0, "message": str(e),"error_code":1}
+        return JsonResponse(result,safe=False,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def logout(request):
+    username = request.session.get('username')
+    if username:
+        request.session.flush()
+        return redirect('login')
+    else:
+        return redirect('login')

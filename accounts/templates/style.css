@@ -1,3 +1,4 @@
+<style>
 body {
   background-size: cover;
   background-position: center;
@@ -9,12 +10,13 @@ body {
   font-family: Arial, sans-serif;
 }
 .footer {
-background-color: #34495e;
+background-color: black;
 color: #ffffff;
 padding: 20px 0;
 position: fixed;
 bottom: 0;
 width: 100%;
+z-index: 1500;
 }
 
 .footer p {
@@ -26,14 +28,12 @@ font-size: 18px; /* Adjust the size of the copyright symbol */
 margin-right: 5px; /* Add some space between the symbol and the text */
 }
 
-
 .content {
-  top:0;
-  margin-bottom: 120px; /* Adjust this value to create space between content and footer */
-  margin-left: 250px; /* Adjust based on the width of the sidebar */
-  padding: 20px; /* Add padding as needed */
-  flex-grow: 1; /* Allow content to grow to fill remaining space */
+top:0;
+margin-left: 0; /* Adjusted to remove the space */
+flex-grow: 1;
 }
+
 .navbar {
   background-color:#34495e; /* Darker grey background */
   color: #fff;
@@ -76,7 +76,6 @@ border-top-right-radius: 20px;
 border-bottom-right-radius: 20px;
 font-size: 14px;
 }
-
 /* .navbar-search button {
   border: none;
   background-color: #007bff;
@@ -116,7 +115,7 @@ font-size: 14px;
 .user-dropdown:hover .user-dropdown-menu {
   display: block;
 }
-.logout-btn {
+.profile-btn {
   background-color: #dc3545; /* Red color */
   border: none;
   border-radius: 20px; /* Round button */
@@ -127,7 +126,7 @@ font-size: 14px;
   transition: background-color 0.3s; /* Smooth transition */
   font-size: 14px;
 }
-.logout-btn:focus {
+.profile-btn:focus {
   outline: none;
 }
 .logo {
@@ -141,14 +140,16 @@ font-size: 14px;
 }
 
 table {
-border-collapse: collapse;
+/* border-collapse: collapse; */
 margin-top: 0;
-width: 100%;
+width: 80%;
+ margin-left: 30px;  
+ margin-bottom: 10px;
 }
 
 th, td {
-border: 1px solid #ddd;
-padding: 8px;
+border: 2px solid #c56608;
+padding: 4px;
 text-align: left;
 }
 
@@ -173,6 +174,7 @@ left: 0;
 z-index: 1000; /* Ensure sidebar is above the strip */
 overflow-y: auto; /*Make sidebar scrollable*/
 }
+
 
 .sidebar-content {
 padding-left: 20px; /* Adjust the padding to ensure text is aligned to the extreme left */
@@ -283,3 +285,29 @@ transition: background-color 0.3s ease; /* Smooth transition for background colo
 background-color:#34495e; /* Darker background color on hover */
 color :red;
 }
+.pagination-buttons {
+margin-top: 1.5rem;
+display: flex;
+justify-content: center; /* Center the buttons horizontally */
+}
+
+.pagination-buttons button {
+border-radius: 30px;
+margin: 0 5px; /* Add some spacing between buttons */
+}
+
+.pagination-buttons button:hover {
+background-color: #007bff; /* Change color on hover */
+}
+
+.pagination-buttons button:focus {
+outline: none;
+box-shadow: none;
+}
+.custom-container {
+width: 90%; /* Adjust width as needed */
+max-width: 1200px; /* Optional: Set max-width for larger screens */
+margin: 0 auto; /* Center the container horizontally */
+/* Add other styles as needed */
+}
+</style>
