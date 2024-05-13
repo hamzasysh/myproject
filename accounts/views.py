@@ -4,6 +4,8 @@ from django.conf import settings
 from django.http import JsonResponse
 from pymongo import MongoClient
 from myproject.my_globals.mongo_client import *
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
 from accounts.utils.helpers import *
 from rest_framework import status
@@ -65,3 +67,21 @@ def logout(request):
         return redirect('login')
     else:
         return redirect('login')
+    
+
+
+
+
+@csrf_exempt
+def add_data(request):
+        # For GET request
+    if request.method == 'GET':
+        data = request.GET.dict()
+    # For POST request
+    elif request.method == 'POST':
+        data = request.POST.dict()
+    else:
+        data = {'error': 'Invalid request method'}
+
+    print("add_data:",data)
+    return JsonResponse(data)
