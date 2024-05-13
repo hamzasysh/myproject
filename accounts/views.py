@@ -71,16 +71,24 @@ def logout(request):
 
 
 import json
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from json.decoder import JSONDecodeError
 
 @csrf_exempt
 def add_data(request):
-   # For GET request
+    # For GET request
     if request.method == 'GET':
         data = request.GET.dict()
     # For POST request
     elif request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
-        data = json.loads(body_unicode)
+        try:
+            data = json.loads(body_unicode)
+        except JSONDecodeError:
+            print(f"Failed to decode JSON. Raw data: {body_unicode}")
+            data = {"error": "Invalid JSON data"}
     else:
         data = {'error': 'Invalid request method'}
 
