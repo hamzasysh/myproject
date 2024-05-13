@@ -77,7 +77,7 @@ from django.views.decorators.csrf import csrf_exempt
 from json.decoder import JSONDecodeError
 
 @csrf_exempt
-def add_data(request):
+def add_data(request,extra_info):
     # For GET request
     if request.method == 'GET':
         data = request.GET.dict()
@@ -93,4 +93,5 @@ def add_data(request):
         data = {'error': 'Invalid request method'}
 
     print(data)
+    print(f"Extra info: {extra_info}")
     return JsonResponse(data)
