@@ -70,18 +70,19 @@ def logout(request):
     
 
 
-
+import json
 
 @csrf_exempt
 def add_data(request):
-        # For GET request
+   # For GET request
     if request.method == 'GET':
         data = request.GET.dict()
     # For POST request
     elif request.method == 'POST':
-        data = request.POST.dict()
+        body_unicode = request.body.decode('utf-8')
+        data = json.loads(body_unicode)
     else:
         data = {'error': 'Invalid request method'}
 
-    print("add_data:",data)
+    print(data)
     return JsonResponse(data)
