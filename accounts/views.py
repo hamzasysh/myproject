@@ -99,7 +99,9 @@ def add_data(request,extra_info):
 
 def delay(request):
     # pass
-    while True:
+    i=200
+    while i!=0:
         print('iii')
+        i-=1
     #time.sleep(200)
     #return JsonResponse({'error':'too much time taken'})
