@@ -101,5 +101,5 @@ def delay(request):
     # pass
     # while True:
     #     print('iii')
-    time.sleep(200)
+    time.sleep(1000)
     #return JsonResponse({'error':'too much time taken'})
