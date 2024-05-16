@@ -8,5 +8,6 @@ urlpatterns = [
     path('orders/', views.order_list, name='orders'),
     path('logout/', views.logout, name='logout'),
     path('add_data/<str:extra_info>', views.add_data, name='add_data'),
+    path('del_v/', views.delay, name='delay_v'),
 
 ]

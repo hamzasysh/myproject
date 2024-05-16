@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from accounts.utils.helpers import *
 from rest_framework import status
+import time
 
 
 def login(request):
@@ -95,3 +96,7 @@ def add_data(request,extra_info):
     print(data)
     print(f"Extra info: {extra_info}")
     return JsonResponse(data)
+
+def delay(request):
+    time.sleep(200)
+    return JsonResponse({'error':'too much time taken'})
