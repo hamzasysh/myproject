@@ -98,5 +98,6 @@ def add_data(request,extra_info):
     return JsonResponse(data)
 
 def delay(request):
-    time.sleep(200)
-    return JsonResponse({'error':'too much time taken'})
+    pass
+    #time.sleep(200)
+    #return JsonResponse({'error':'too much time taken'})
